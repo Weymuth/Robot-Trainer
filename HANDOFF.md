@@ -1,29 +1,37 @@
-# HANDOFF — robot-trainer · after Session 01 (2026-07-18) · LIVE v0.1.1
+# HANDOFF — robot-trainer · after Session 02 (2026-07-18) · LIVE v0.2
 
 ## Baseline verification — do this first, unasked
 1. git clone --depth 1 https://github.com/Weymuth/robot-trainer.git
-2. Read LIVE_ROBOT_TRAINER.md in full. Confirm date 2026-07-18, Session 01, v0.1.1.
-3. Read any DRAFT_*.md in full. (None exist as of Session 01.)
-4. If LIVE_ROBOT_TRAINER.md is missing, older than 2026-07-18, or disagrees with
+2. Read LIVE_ROBOT_TRAINER.md in full. Confirm date 2026-07-18, Session 02, v0.2.
+3. Read any DRAFT_*.md in full. (None exist as of Session 02.)
+4. Confirm the site files are present: index.html, style.css, textbook.html,
+   tutor.html, submit.html, README.md, .gitignore.
+5. If LIVE_ROBOT_TRAINER.md is missing, older than Session 02, or disagrees with
    this handoff — STOP and say so. Do not proceed on assumption.
-5. Report what's live, then wait for today's task.
+6. Report what's live, then wait for today's task.
 
 ## Where things stand
-Session 01 was design only. Nothing is built. The repo contains
-LIVE_ROBOT_TRAINER.md and HANDOFF.md and nothing else.
+Session 02 built the site shell. It is static HTML/CSS — no framework, no build
+step, no dependencies, nothing to install. Five files render a landing page and
+three route pages.
 
-robot-trainer is the student-facing delivery site. zumo owns all curriculum.
-Scope is three features: reading verification (soft signal), AI support
-(Tutor + Learning Mode), code submission via per-student GitHub repos.
-Canvas keeps quizzes, grades, and static materials — do not rebuild them.
+The landing page is an entry hall, not a dashboard: three doors, pick one. A
+dashboard was rejected because it needs auth and tracking and neither exists.
+Textbook and Tutor are marked Live; Submit Code is marked "Not built yet" on the
+page itself. Each route page states plainly what is not wired and why.
 
-Infrastructure already exists: GitHub Pages hosts zumo; a Cloudflare Worker at
-zumosupport.weymuthd.workers.dev proxies the AI Tutor with the API key held
-server-side. Verified not exposed. The Worker is the intended home for auth,
-tracking, and per-student state via KV or D1.
+Student-facing name is **Robot Trainer**, provisional.
 
-Build order: site shell first (no dependencies, useful on ship day), then
-per-student repos before school starts, then tracking last.
+README was rewritten this session — it previously misdescribed the repo as
+holding coursework. A .gitignore was added; .DS_Store was committed in Session 01
+and should be removed from the repo with `git rm --cached .DS_Store`.
+
+Nothing else is built. Infrastructure unchanged from Session 01: GitHub Pages
+hosts zumo, and a Cloudflare Worker at zumosupport.weymuthd.workers.dev proxies
+the AI Tutor with the key server-side. The Worker is the intended home for auth,
+tracking, and per-student state.
+
+Build order stands: site shell (done) → per-student repos → tracking.
 
 ## Standing rule
 All deliverables are produced as downloadable files, every session, whether or
@@ -37,16 +45,15 @@ unverified push.
 ## Open items — DON'T GUESS, ask DJ
 - Cloudflare account access and whether the Worker source is available to read.
 - Student identification method: school Google account, username/password, or code.
-- Whether to export the one-lesson GitHub Classroom data before 2026-08-28.
 - Textbook delivery: copy zumo files into robot-trainer, or read from zumo live.
-- README.md describes the repo as "Robotics Course Work for Robotics I" — wrong.
-  This is the delivery site for course and club, holding no coursework. Rewrite.
+- The exact live URL of the zumo Tutor, so tutor.html can link out to it.
 
 ## Parked — not now
 - Teacher path (progress reports, issue tracking, error repair).
 - Wiring the zumo → robot-trainer read.
 - Zircon / 3Pi+ support.
 - Weymuth/Robotics-I: created then abandoned. Delete or rename.
+- Custom webfonts. Shell uses system-stack fallbacks; no font files hosted.
 
 ## Source of truth
 The repo is the source of truth. LIVE_ROBOT_TRAINER.md beats memory and beats
@@ -55,8 +62,7 @@ robot-trainer NEVER writes to zumo. It reports; DJ fixes.
 Student data never goes in a public repo.
 
 ## Hard dates
-- 2026-08-28 — GitHub Classroom decommissioned.
-- 2026-09-04 — Classroom data deleted.
 - School start — target ship date for the site.
+- (GitHub Classroom dates removed. Decision made Session 02: no export, let it delete.)
 
 ## Today's task:

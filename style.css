@@ -1,0 +1,274 @@
+/* Robot Trainer — shell v0.2
+   Palette: graphite / off-white / sensor-amber / steel / alert
+   No build step. No dependencies. Static files only. */
+
+:root {
+  --graphite: #1C1F21;
+  --paper:    #EDE9E3;
+  --amber:    #E8A33D;
+  --steel:    #5C6B73;
+  --alert:    #C4452E;
+
+  --rule: rgba(28,31,33,0.14);
+
+  --display: "Oswald", "Haettenschweiler", "Arial Narrow", sans-serif;
+  --body:    "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --mono:    "IBM Plex Mono", ui-monospace, "Courier New", monospace;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--graphite);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.55;
+}
+
+.wrap {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ---------- masthead ---------- */
+
+.masthead {
+  background: var(--graphite);
+  color: var(--paper);
+  padding: 34px 0 0;
+}
+
+.masthead .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.masthead h1 {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 1;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.sub {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--steel);
+  margin: 8px 0 0;
+}
+
+/* signature: reflectance sensor strip.
+   lit = subsystem live, unlit = built not wired, dim = not started */
+.sensors {
+  display: flex;
+  gap: 5px;
+  padding-bottom: 26px;
+}
+
+.cell {
+  width: 26px;
+  height: 9px;
+  background: rgba(237,233,227,0.16);
+  border-radius: 1px;
+}
+
+.cell.lit {
+  background: var(--amber);
+}
+
+.cell.lit:first-child {
+  animation: sweep 3.4s ease-in-out infinite;
+}
+
+.cell.dim {
+  background: rgba(237,233,227,0.06);
+}
+
+@keyframes sweep {
+  0%, 70%, 100% { opacity: 1; }
+  85%           { opacity: 0.35; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cell.lit:first-child { animation: none; }
+}
+
+/* ---------- routes ---------- */
+
+.routes {
+  background: var(--graphite);
+  border-top: 1px solid rgba(237,233,227,0.12);
+}
+
+.routes .wrap {
+  display: flex;
+  gap: 28px;
+}
+
+.routes a {
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--paper);
+  text-decoration: none;
+  padding: 14px 0;
+  border-bottom: 2px solid transparent;
+}
+
+.routes a:hover,
+.routes a:focus-visible {
+  border-bottom-color: var(--amber);
+}
+
+/* ---------- entry ---------- */
+
+main { padding: 52px 24px 8px; }
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--steel);
+  margin: 0 0 6px;
+}
+
+.entry h2 {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 30px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin: 0 0 26px;
+}
+
+.doors {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--rule);
+}
+
+.doors li { border-bottom: 1px solid var(--rule); }
+
+.doors a {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2px 16px;
+  padding: 20px 4px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.doors a:hover,
+.doors a:focus-visible {
+  background: rgba(28,31,33,0.04);
+}
+
+.door-name {
+  font-family: var(--display);
+  font-size: 21px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.door-what {
+  grid-column: 1;
+  color: var(--steel);
+  font-size: 15px;
+}
+
+.status {
+  grid-row: 1 / span 2;
+  grid-column: 2;
+  align-self: center;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.status.live    { color: var(--amber); }
+.status.pending { color: var(--alert); }
+
+/* ---------- note / footer ---------- */
+
+.note {
+  margin: 40px 0 0;
+  padding: 16px 18px;
+  border-left: 3px solid var(--steel);
+  background: rgba(92,107,115,0.07);
+}
+
+.note p { margin: 0; font-size: 15px; color: var(--steel); }
+
+footer {
+  margin-top: 56px;
+  padding-top: 18px;
+  padding-bottom: 40px;
+  border-top: 1px solid var(--rule);
+}
+
+.meta {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--steel);
+  margin: 0;
+}
+
+/* ---------- placeholder pages ---------- */
+
+.stub h2 {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 30px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin: 0 0 14px;
+}
+
+.stub .why {
+  border-left: 3px solid var(--alert);
+  background: rgba(196,69,46,0.06);
+  padding: 16px 18px;
+  margin: 24px 0;
+}
+
+.stub .why p { margin: 0; font-size: 15px; }
+
+.back {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--steel);
+}
+
+a:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 3px;
+}
+
+@media (max-width: 520px) {
+  .masthead h1 { font-size: 31px; }
+  .sensors { padding-bottom: 20px; }
+  .routes .wrap { gap: 18px; }
+  .doors a { grid-template-columns: 1fr; }
+  .status { grid-row: auto; grid-column: 1; }
+}
