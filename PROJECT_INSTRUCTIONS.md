@@ -40,6 +40,22 @@ Never paste a file's contents into chat as the only delivery method.
 Chat may show a summary or an excerpt; the file itself is always downloadable.
 This applies whether or not DJ asks.
 
+## Verify every push — never take "pushed" on faith
+When DJ says "pushed," "committed," "it's up," or anything equivalent, VERIFY
+before treating the session as closed or the state as locked:
+1. Re-clone the repo fresh (do not reuse an earlier clone — it is stale).
+2. Confirm every file from this session is present.
+3. Confirm each file MATCHES what was generated — compare checksums, do not
+   trust filenames alone. A file can exist and still be the wrong version.
+4. Confirm LIVE_ROBOT_TRAINER.md shows the expected date, session, and version.
+5. Report MATCH or DIFFERS per file. If anything differs or is missing, say so
+   plainly and do not close the session.
+
+This is the same principle as "grep the file, never trust a pasted version
+number" — a spoken confirmation is not evidence. Verification is cheap; a
+session closed on an unverified push means the next session starts from a
+baseline that does not exist.
+
 ## What lives where
 - Repo: locked/stable state — LIVE_ROBOT_TRAINER.md, site files, reference material.
 - DRAFT_<name>.md: in-flight state too large for memory. Deleted once it locks.

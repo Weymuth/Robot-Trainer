@@ -1,5 +1,5 @@
 # LIVE — robot-trainer
-**Date:** 2026-07-18 · **Session:** 01 · **Version:** v0.1
+**Date:** 2026-07-18 · **Session:** 01 · **Version:** v0.1.1
 
 ## Currently working on
 Nothing built. Design locked this session; no code, no site, no files committed
@@ -36,8 +36,12 @@ beyond LIVE_ROBOT_TRAINER.md and HANDOFF.md.
 - Build order: site → repos → tracking.
 - Class size 8–12.
 - All session deliverables are produced as downloadable files.
+- Every push is verified by fresh re-clone + checksum match before session close.
+  A spoken "pushed" is not evidence.
 
 ## Open — DON'T GUESS
+- README.md misdescribes the repo as "Robotics Course Work"; scope is the delivery
+  site for course AND club. Needs a one-line rewrite.
 - Cloudflare account access and Worker source availability.
 - Student identification: school Google account vs username/password vs code.
 - Export one-lesson GitHub Classroom data before 2026-08-28, or let it delete.
