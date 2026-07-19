@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Home &middot; Robot Trainer</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="ident">
+      <h1>Robot&nbsp;Trainer</h1>
+      <p class="sub">Mercersburg Academy Robotics &middot; course &amp; club</p>
+    </div>
+    <div class="sensors" aria-hidden="true">
+      <span class="cell lit"></span>
+      <span class="cell lit"></span>
+      <span class="cell lit"></span>
+      <span class="cell"></span>
+      <span class="cell dim"></span>
+      <span class="cell dim"></span>
+    </div>
+  </div>
+</header>
+
+<nav class="routes" aria-label="Main">
+  <div class="wrap">
+    <span class="whoami">Signed in as <strong id="who">&hellip;</strong></span>
+    <a href="#" id="signout" class="signout">Sign out</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <section class="entry">
+    <p class="eyebrow">Start here</p>
+    <h2>Three doors.</h2>
+
+    <ul class="doors">
+      <li>
+        <a href="https://weymuth.github.io/zumo/" target="_blank" rel="noopener"
+           data-track="textbook">
+          <span class="door-name">Textbook</span>
+          <span class="door-what">All lessons. Opens in a new tab &mdash; this page stays open.</span>
+          <span class="status live">Live</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://weymuth.github.io/zumo/tutor.html" target="_blank" rel="noopener"
+           data-track="tutor">
+          <span class="door-name">Tutor</span>
+          <span class="door-what">Ask questions about what you're reading or writing.</span>
+          <span class="status live">Live</span>
+        </a>
+      </li>
+      <li>
+        <a href="submit.html" data-track="submit">
+          <span class="door-name">Submit Code</span>
+          <span class="door-what">Hand in your sketch when it runs on the robot.</span>
+          <span class="status pending">Not built yet</span>
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <section class="note">
+    <p>Quizzes, grades, and handouts stay on Canvas. Nothing here replaces them.</p>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <p class="meta">Robot Trainer &middot; shell v0.3 &middot; delivery only</p>
+</footer>
+
+<script>
+const AUTH = "https://zumoauth.weymuthd.workers.dev";
+
+// ---- session check: no session, no page ----
+(async function () {
+  try {
+    const r = await fetch(AUTH + "/me", { credentials: "include" });
+    if (!r.ok) { window.location.replace("login.html"); return; }
+    const data = await r.json();
+    document.getElementById("who").textContent = data.username || "unknown";
+  } catch (e) {
+    window.location.replace("login.html");
+  }
+})();
+
+// ---- outbound click tracking ----
+// Fires before the new tab opens. keepalive lets the request finish
+// even if this page is navigating or the tab loses focus.
+function track(event) {
+  try {
+    fetch(AUTH + "/track", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      keepalive: true,
+      body: JSON.stringify({ event: event, at: new Date().toISOString() })
+    });
+  } catch (e) { /* never block the click */ }
+}
+
+document.querySelectorAll("[data-track]").forEach(a => {
+  a.addEventListener("click", () => track(a.dataset.track));
+});
+
+// ---- sign out ----
+document.getElementById("signout").addEventListener("click", async e => {
+  e.preventDefault();
+  try { await fetch(AUTH + "/logout", { method: "POST", credentials: "include" }); }
+  catch (err) { /* fall through to login either way */ }
+  window.location.replace("login.html");
+});
+</script>
+
+</body>
+</html>
